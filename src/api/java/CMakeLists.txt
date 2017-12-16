@@ -17,7 +17,7 @@ set(Z3_JAVA_NATIVE_JAVA "${CMAKE_CURRENT_BINARY_DIR}/Native.java")
 set(Z3_JAVA_NATIVE_CPP "${CMAKE_CURRENT_BINARY_DIR}/Native.cpp")
 add_custom_command(OUTPUT "${Z3_JAVA_NATIVE_JAVA}" "${Z3_JAVA_NATIVE_CPP}"
   COMMAND "${PYTHON_EXECUTABLE}"
-    "${CMAKE_SOURCE_DIR}/scripts/update_api.py"
+    "${PROJECT_SOURCE_DIR}/scripts/update_api.py"
     ${Z3_FULL_PATH_API_HEADER_FILES_TO_SCAN}
     "--java-output-dir"
     "${CMAKE_CURRENT_BINARY_DIR}"
@@ -25,10 +25,10 @@ add_custom_command(OUTPUT "${Z3_JAVA_NATIVE_JAVA}" "${Z3_JAVA_NATIVE_CPP}"
     ${Z3_JAVA_PACKAGE_NAME}
   DEPENDS
     ${Z3_FULL_PATH_API_HEADER_FILES_TO_SCAN}
-    "${CMAKE_SOURCE_DIR}/scripts/update_api.py"
+    "${PROJECT_SOURCE_DIR}/scripts/update_api.py"
     ${Z3_GENERATED_FILE_EXTRA_DEPENDENCIES}
     # FIXME: When update_api.py no longer uses ``mk_util`` drop this dependency
-    "${CMAKE_SOURCE_DIR}/scripts/mk_util.py"
+    "${PROJECT_SOURCE_DIR}/scripts/mk_util.py"
   COMMENT "Generating \"${Z3_JAVA_NATIVE_JAVA}\" and \"${Z3_JAVA_NATIVE_CPP}\""
   ${ADD_CUSTOM_COMMAND_USES_TERMINAL_ARG}
 )
@@ -76,7 +76,7 @@ foreach (enum_file ${Z3_JAVA_ENUMERATION_PACKAGE_FILES})
 endforeach()
 add_custom_command(OUTPUT ${Z3_JAVA_ENUMERATION_PACKAGE_FILES_FULL_PATH}
   COMMAND "${PYTHON_EXECUTABLE}"
-    "${CMAKE_SOURCE_DIR}/scripts/mk_consts_files.py"
+    "${PROJECT_SOURCE_DIR}/scripts/mk_consts_files.py"
     ${Z3_FULL_PATH_API_HEADER_FILES_TO_SCAN}
     "--java-output-dir"
     "${CMAKE_CURRENT_BINARY_DIR}"
@@ -84,7 +84,7 @@ add_custom_command(OUTPUT ${Z3_JAVA_ENUMERATION_PACKAGE_FILES_FULL_PATH}
     ${Z3_JAVA_PACKAGE_NAME}
   DEPENDS
     ${Z3_FULL_PATH_API_HEADER_FILES_TO_SCAN}
-    "${CMAKE_SOURCE_DIR}/scripts/mk_consts_files.py"
+    "${PROJECT_SOURCE_DIR}/scripts/mk_consts_files.py"
     ${Z3_GENERATED_FILE_EXTRA_DEPENDENCIES}
   COMMENT "Generating ${Z3_JAVA_PACKAGE_NAME}.enumerations package"
   ${ADD_CUSTOM_COMMAND_USES_TERMINAL_ARG}

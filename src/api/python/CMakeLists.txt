@@ -34,16 +34,16 @@ endforeach()
 # Generate z3core.py
 add_custom_command(OUTPUT "${z3py_bindings_build_dest}/z3/z3core.py"
   COMMAND "${PYTHON_EXECUTABLE}"
-    "${CMAKE_SOURCE_DIR}/scripts/update_api.py"
+    "${PROJECT_SOURCE_DIR}/scripts/update_api.py"
     ${Z3_FULL_PATH_API_HEADER_FILES_TO_SCAN}
     "--z3py-output-dir"
     "${z3py_bindings_build_dest}"
   DEPENDS
     ${Z3_FULL_PATH_API_HEADER_FILES_TO_SCAN}
-    "${CMAKE_SOURCE_DIR}/scripts/update_api.py"
+    "${PROJECT_SOURCE_DIR}/scripts/update_api.py"
     ${Z3_GENERATED_FILE_EXTRA_DEPENDENCIES}
     # FIXME: When update_api.py no longer uses ``mk_util`` drop this dependency
-    "${CMAKE_SOURCE_DIR}/scripts/mk_util.py"
+    "${PROJECT_SOURCE_DIR}/scripts/mk_util.py"
   COMMENT "Generating z3core.py"
   ${ADD_CUSTOM_COMMAND_USES_TERMINAL_ARG}
 )
@@ -52,13 +52,13 @@ list(APPEND build_z3_python_bindings_target_depends "${z3py_bindings_build_dest}
 # Generate z3consts.py
 add_custom_command(OUTPUT "${z3py_bindings_build_dest}/z3/z3consts.py"
   COMMAND "${PYTHON_EXECUTABLE}"
-    "${CMAKE_SOURCE_DIR}/scripts/mk_consts_files.py"
+    "${PROJECT_SOURCE_DIR}/scripts/mk_consts_files.py"
     ${Z3_FULL_PATH_API_HEADER_FILES_TO_SCAN}
     "--z3py-output-dir"
     "${z3py_bindings_build_dest}"
   DEPENDS
     ${Z3_FULL_PATH_API_HEADER_FILES_TO_SCAN}
-    "${CMAKE_SOURCE_DIR}/scripts/mk_consts_files.py"
+    "${PROJECT_SOURCE_DIR}/scripts/mk_consts_files.py"
     ${Z3_GENERATED_FILE_EXTRA_DEPENDENCIES}
   COMMENT "Generating z3consts.py"
   ${ADD_CUSTOM_COMMAND_USES_TERMINAL_ARG}
